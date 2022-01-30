@@ -7,16 +7,17 @@ import 'package:get/get.dart';
 class MyHomePage extends StatelessWidget {
   var deger = 0;
   Sabitler sabit = Sabitler();
+  Controller cont=Get.put(Controller());
+  var sayi=0;
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar:Obx(()=> BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: Colors.teal,
                 ),
                 label: "",
                 backgroundColor: Colors.yellow),
@@ -34,9 +35,14 @@ class MyHomePage extends StatelessWidget {
                 backgroundColor: Colors.green)
           ],
           type: BottomNavigationBarType.fixed,
-          currentIndex: 0,
-        ),
+          currentIndex:sayi,
+          onTap: (index){
+            sayi = cont.getBottomNavBarNo(index);
+            print("BottomBar Deger : "+sayi.toString());
+          },
+        ),),
         body: Container(
+
           height: screenSize.height,
           width: screenSize.width,
           child: SingleChildScrollView(
@@ -45,8 +51,8 @@ class MyHomePage extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-                      width: 25,
-                      height: 100,
+                      width: screenSize.width*0.1,
+                      height: screenSize.height*0.2,
                     ),
                     CircleAvatar(
                       child: Image.asset("assets/images/pp.jpg"),
@@ -54,7 +60,8 @@ class MyHomePage extends StatelessWidget {
                       maxRadius: 25,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: screenSize.width*0.02,
+                      //width:10
                     ),
                     Column(
                       //mainAxisAlignment: MainAxisAlignment.spaceAround,
