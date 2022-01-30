@@ -5,44 +5,18 @@ import 'package:flutter_example/controller/controller.dart';
 import 'package:get/get.dart';
 
 class MyHomePage extends StatelessWidget {
-  var deger = 0;
   Sabitler sabit = Sabitler();
-  Controller cont=Get.put(Controller());
-  var sayi=0;
+  Controller cont = Get.put(Controller());
+  var number = 0;
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        bottomNavigationBar:Obx(()=> BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                label: "",
-                backgroundColor: Colors.yellow),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.play_circle_filled_outlined),
-                backgroundColor: Colors.yellow,
-                label: ""),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today),
-                label: "",
-                backgroundColor: Colors.black),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.document_scanner),
-                label: "",
-                backgroundColor: Colors.green)
-          ],
-          type: BottomNavigationBarType.fixed,
-          currentIndex:sayi,
-          onTap: (index){
-            sayi = cont.getBottomNavBarNo(index);
-            print("BottomBar Deger : "+sayi.toString());
-          },
-        ),),
+        bottomNavigationBar: Obx(
+          () => buildBottomNavigationBar(),
+        ),
         body: Container(
-
           height: screenSize.height,
           width: screenSize.width,
           child: SingleChildScrollView(
@@ -51,8 +25,8 @@ class MyHomePage extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-                      width: screenSize.width*0.1,
-                      height: screenSize.height*0.2,
+                      width: screenSize.width * 0.1,
+                      height: screenSize.height * 0.2,
                     ),
                     CircleAvatar(
                       child: Image.asset("assets/images/pp.jpg"),
@@ -60,7 +34,7 @@ class MyHomePage extends StatelessWidget {
                       maxRadius: 25,
                     ),
                     SizedBox(
-                      width: screenSize.width*0.02,
+                      width: screenSize.width * 0.02,
                       //width:10
                     ),
                     Column(
@@ -441,5 +415,35 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+fixedColor: Colors.teal,      items: [
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: "",
+            backgroundColor: Colors.teal),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.play_circle_filled_outlined),
+            label: ""),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: "",
+           ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.document_scanner),
+            label: "",
+      )
+      ],
+      type: BottomNavigationBarType.fixed,
+      currentIndex: number,
+      onTap: (index) {
+        number = cont.getBottomNavBarIndex(index);
+        print("BottomBar Deger : " + number.toString());
+      },
+    );
   }
 }
